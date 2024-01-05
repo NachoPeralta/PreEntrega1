@@ -1,10 +1,12 @@
 const ProductManager = require('./service/ProductManager');
 const Server = require('./service/Server');
 
+
+
 // Se creará una instancia de la clase “ProductManager”
 console.log("*********************************************");
 console.log("Instancia de la clase ProductManager");
-const productManager = new ProductManager("./products.json");
+const productManager = new ProductManager("./src/models/products.json");
 console.log("*********************************************");
 
 // Se declara la funcion getProductData como async para poder usar await de lo contrario devuelve "promise - pending"
