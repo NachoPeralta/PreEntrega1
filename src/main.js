@@ -1,4 +1,5 @@
 const ProductManager = require('./service/ProductManager');
+const CartManager = require('./service/CartManager');
 const Server = require('./service/Server');
 
 
@@ -7,6 +8,9 @@ const Server = require('./service/Server');
 console.log("*********************************************");
 console.log("Instancia de la clase ProductManager");
 const productManager = new ProductManager("./src/models/products.json");
+console.log("*********************************************");
+console.log("Instancia de la clase CartManager");
+const cartManager = new CartManager("./src/models/carts.json");
 console.log("*********************************************");
 
 // Se declara la funcion getProductData como async para poder usar await de lo contrario devuelve "promise - pending"
@@ -191,7 +195,7 @@ function run() {
 }
 
 console.log("Instancia de la clase Server");
-const myServer = new Server(productManager);
+const myServer = new Server(productManager, cartManager);
 
 console.log("*********************************************");
 console.log("Iniciando Servidor...");
