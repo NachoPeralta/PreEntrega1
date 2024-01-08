@@ -8,22 +8,27 @@ class CartManager {
         this.carts = path ? this.readFile() : [];
     }
 
+    async getCarts() {
+        await this.readFile();
+        return this.carts;        
+    }
+
     async readFile() {
         try {
             const data = await fs.readFile(this.path, "utf-8");
             this.carts = JSON.parse(data);
 
-            this.lastCartId = this.carts.length > 0 ? this.carts[this.carts.length - 1].id : 0;
-            
             return this.carts;
 
         } catch (error) {
-            console.error("Error reading file:", error);
+            console.error("Error al leer Carts.json:", error);
             return [];
         }    
     }
 
     async createCart() {
+        this.lastCartId =  this.carts.length > 0 ? Math.max(...this.carts.map(c => c.id)) : 0;
+        
         const newCart = {
             id: ++this.lastCartId,
             products: []
@@ -41,34 +46,27 @@ class CartManager {
     }
 
     async getCartById(id) {
-        await this.readFile();
+        await this.getCarts();
         const cart = this.carts.find(item => item.id == id);
-
+    
         if (!cart) {
-            return {error:"Carrito no encontrado"};
+            return {error: "Carrito no encontrado"};
         }
-        return cart;    
+        return cart;
     }
+    
 
-    async addProductToCart(cartId, productId, quantity) {
-        await this.readFile();
-    
-        const cartIndex = this.carts.findIndex(item => item.cartId == cartId);
-    
-        if (cartIndex === -1) {
-            return { error: "Carrito no encontrado" };
-        }
-    
-        const cart = this.carts[cartIndex];
-        const productIndex = cart.products.findIndex(item => item.productId == productId);
+    async addProductToCart(cart, product, quantity = 1) {    
+        
+        const productIndex = cart.products.findIndex(item => item.productId == product.id);
     
         if (productIndex !== -1) {
-            // Si el producto ya existe en el carrito, actualiza la cantidad
+            // Si el producto ya existe en el carrito, actualizo la cantidad
             cart.products[productIndex].quantity += quantity;
         } else {
-            // Si el producto no existe, agrégalo al carrito
+            // Si el producto no existe, lo agrego al carrito
             cart.products.push({
-                productId: productId,
+                productId: product.id,
                 quantity: quantity
             });
         }

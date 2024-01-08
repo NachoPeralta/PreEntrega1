@@ -4,11 +4,9 @@ const cartRouter     = require("../routes/cart.router.js");
 
 class Server {
     // Se creará una instancia de express para crear el servidor.
-    constructor(productManager, cartManager) {
+    constructor() {
         this.app = express();
         this.port = 8080;
-        this.productManager = productManager;
-        this.cartManager    = cartManager;
     }
 
     // Se crea un método para levantar el servidor al iniciar la aplicación.
@@ -22,7 +20,7 @@ class Server {
         this.app.use(express.json());
 
         this.app.use("/api/products", productsRouter); 
-        this.app.use("/api/cart", cartRouter);
+        this.app.use("/api/carts", cartRouter);
     }
 }
 module.exports = Server;

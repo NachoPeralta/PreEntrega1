@@ -5,14 +5,15 @@ class ProductManager {
 
     constructor(path) {
         this.path = path;
-        this.products = path ? this.readFile() : [];
+        this.products = path ? this.readFile().then(data => data ?? []) : [];
     }
 
     async addProduct(newProduct) {
+        this.lastId = this.products.length > 0 ? Math.max(...this.products.map(p => p.id)) : this.lastId;
 
-        let { title, description, price, thumbnail, code, stock } = newProduct;
+        let { title, description, code, price, status, stock, category, thumbnail } = newProduct;
 
-        if (!title || !description || !price || !thumbnail || !code || !stock) {
+        if (!title || !description || !code || !price || !status || !stock || !category) {
             console.log("Los datos no pueden estar vacios");
             return;
         }
@@ -22,17 +23,19 @@ class ProductManager {
         }
 
         const product = {
-            id: ++ProductManager.lastId,
+            id: ++this.lastId,
             title,
             description,
-            price,
-            thumbnail,
             code,
-            stock
+            price,
+            status,
+            stock,
+            category,
+            thumbnail
         }
 
         this.products.push(product);
-        await this.saveFile();
+        return await this.saveFile();
     }
 
     async getProducts() {
@@ -44,8 +47,8 @@ class ProductManager {
         await this.readFile();
         const product = this.products.find(item => item.id == id);
 
-        if (!product) {            
-            return {error:"Producto no encontrado"};
+        if (!product) {
+            return { error: "Producto no encontrado" };
         }
         return product;
     }
@@ -64,42 +67,55 @@ class ProductManager {
         try {
             const data = JSON.stringify(this.products, null, 2);
             await fs.writeFile(this.path, data);
-            console.log("Productos Guardados");
+            console.log("Producto Guardado");
+            return data;
 
         } catch (error) {
-            console.log("Error al guardar archivo:", error);
+            console.log("Error al guardar producto:", error);
+            return error;
         }
 
     }
 
     async updateProduct(id, newData) {
-        await this.readFile();
-        const index = this.products.findIndex(item => item.id === id);
+        try {
+            await this.readFile();
+            const index = this.products.findIndex(item => item.id == id);
 
-        if (index === -1) {
-            console.log("Producto no encontrado");
-            return;
+            if (index === -1) {
+                console.log("Producto no encontrado");
+                return;
+            }
+
+            const product = this.products[index];
+            const updatedProduct = { ...product, ...newData };
+            this.products[index] = updatedProduct;
+            await this.saveFile();
+            return updatedProduct;
+
+        } catch (error) {
+            console.log("Error al actualizar producto:", error);
+            return error;
         }
-
-        const product = this.products[index];
-        const updatedProduct = { ...product, ...newData };
-        this.products[index] = updatedProduct;
-        await this.saveFile();
-        return updatedProduct;
     }
 
     async deleteProduct(id) {
-        await this.readFile();
-        const index = this.products.findIndex(item => item.id === id);
+        try {
+            await this.readFile();
+            const index = this.products.findIndex(item => item.id == id);
 
-        if (index === -1) {
-            console.log("Producto no encontrado");
-            return;
+            if (index === -1) {
+                console.log("Producto no encontrado");
+                return;
+            }
+
+            this.products.splice(index, 1);
+            await this.saveFile();
+            return this.products;
+        } catch (error) {
+            console.log("Error al eliminar producto:", error);
+            return error;
         }
-
-        this.products.splice(index, 1);
-        await this.saveFile();
-        return this.products;
     }
 
 }

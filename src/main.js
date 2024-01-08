@@ -1,23 +1,23 @@
-const ProductManager = require('./service/ProductManager');
-const CartManager = require('./service/CartManager');
+// const ProductManager = require('./service/ProductManager');
+// const CartManager = require('./service/CartManager');
 const Server = require('./service/Server');
 
 
 
-// Se creará una instancia de la clase “ProductManager”
-console.log("*********************************************");
-console.log("Instancia de la clase ProductManager");
-const productManager = new ProductManager("./src/models/products.json");
-console.log("*********************************************");
-console.log("Instancia de la clase CartManager");
-const cartManager = new CartManager("./src/models/carts.json");
-console.log("*********************************************");
+// // Se creará una instancia de la clase “ProductManager”
+// console.log("*********************************************");
+// console.log("Instancia de la clase ProductManager");
+// const productManager = new ProductManager("./src/models/products.json");
+// console.log("*********************************************");
+// console.log("Instancia de la clase CartManager");
+// const cartManager = new CartManager("./src/models/carts.json");
+// console.log("*********************************************");
 
-// Se declara la funcion getProductData como async para poder usar await de lo contrario devuelve "promise - pending"
-async function getProductData() {
-    let products = await productManager.getProducts();
-    console.log(products);
-}
+// // Se declara la funcion getProductData como async para poder usar await de lo contrario devuelve "promise - pending"
+// async function getProductData() {
+//     let products = await productManager.getProducts();
+//     console.log(products);
+// }
 
 // Se llamará a la funcion run para llamar a las funciones getProducts y addProduct utilizando await, para ejecutar en orden cada test
 function run() {
@@ -195,7 +195,7 @@ function run() {
 }
 
 console.log("Instancia de la clase Server");
-const myServer = new Server(productManager, cartManager);
+const myServer = new Server();
 
 console.log("*********************************************");
 console.log("Iniciando Servidor...");

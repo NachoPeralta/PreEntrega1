@@ -88,5 +88,109 @@
     "thumbnail": "Sin imagen",
     "code": "abc10",
     "stock": 25
+  },
+  {
+    "id": 12,
+    "title": "Producto actualizado desde Postman",
+    "description": "Este es un producto actualizado desde postman",
+    "price": 5000,
+    "thumbnail": [],
+    "code": "abc19",
+    "stock": 25,
+    "status": "true",
+    "category": "Categoria1"
+  },
+  {
+    "id": 14,
+    "title": "producto prueba 10",
+    "description": "Este es un producto prueba",
+    "price": 200,
+    "thumbnail": "Sin imagen",
+    "code": "abc12",
+    "stock": 25
+  },
+  {
+    "id": 2,
+    "title": "producto prueba 10",
+    "description": "Este es un producto prueba",
+    "price": 200,
+    "thumbnail": "Sin imagen",
+    "code": "abc13",
+    "stock": 25
+  },
+  {
+    "id": 15,
+    "title": "producto prueba 10",
+    "description": "Este es un producto prueba",
+    "price": 200,
+    "thumbnail": "Sin imagen",
+    "code": "abc16",
+    "stock": 25
+  },
+  {
+    "id": 16,
+    "title": "Producto creado desde Postman",
+    "description": "Este es un producto creado desde postman",
+    "code": "abc18",
+    "price": 5000,
+    "status": "true",
+    "stock": 25,
+    "category": "Categoria1",
+    "thumbnail": {}
+  },
+  {
+    "id": 18,
+    "title": "Producto creado desde Postman",
+    "description": "Este es un producto creado desde postman",
+    "code": "abc20",
+    "price": 5000,
+    "status": "true",
+    "stock": 25,
+    "category": "Categoria1",
+    "thumbnail": []
+  },
+  {
+    "id": 19,
+    "title": "Producto actualizado desde Postman",
+    "description": "Este es un producto actualizado desde postman",
+    "code": "abc19",
+    "price": 5000,
+    "status": "true",
+    "stock": 25,
+    "category": "Categoria1",
+    "thumbnail": []
+  },
+  {
+    "id": 20,
+    "title": "Producto creado desde Postman",
+    "description": "Este es un producto creado desde postman",
+    "code": "abc22",
+    "price": 5000,
+    "status": "true",
+    "stock": 25,
+    "category": "Categoria1",
+    "thumbnail": []
+  },
+  {
+    "id": 21,
+    "title": "Producto creado desde Postman",
+    "description": "Este es un producto creado desde postman",
+    "code": "abc23",
+    "price": 5000,
+    "status": "true",
+    "stock": 25,
+    "category": "Categoria1",
+    "thumbnail": []
+  },
+  {
+    "id": 22,
+    "title": "Producto creado desde Postman",
+    "description": "Este es un producto creado desde postman",
+    "code": "abc24",
+    "price": 5000,
+    "status": "true",
+    "stock": 25,
+    "category": "Categoria1",
+    "thumbnail": []
   }
 ]
